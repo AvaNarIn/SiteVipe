@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Последний Выпускной</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      backdrop-filter: blur(4px);
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 0.5em 0;
+    }
+
+    .slider {
+      margin-top: 20px;
+      max-width: 100%;
+      position: relative;
+    }
+
+    .slider img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      /* Убрано свойство transition */
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: #ff8c00;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2em;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e77c00;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nav-button {
+      flex: 1;
+      padding: 10px;
+      font-size: 1.2em;
+      background-color: #ff8c00;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+
+    .nav-button:hover {
+      background-color: #e77c00;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Последний Выпускной</h1>
+    <p>📦 Переезд — не прощание, а новое начало.</p>
+    <p><strong>⏰ 24 мая в 13:00</strong></p>
+    <p>📍 Актовый зал, Главный корпус ТУСУР</p>
+    <p>Приходи — мы ждём тебя, чтобы попрощаться как следует 💙</p>
+
+    <!-- Слайдер -->
+    <div class="slider">
+      <img id="slide" src="photo1.jpg" alt="">
+    </div>
+
+    <!-- Кнопки для навигации -->
+    <div class="navigation-buttons">
+      <button class="nav-button" onclick="prevImage()">← Назад</button>
+      <button class="nav-button" onclick="nextImage()">Вперёд →</button>
+    </div>
+
+    <!-- Кнопка для сохранения фото -->
+    <button onclick="saveImage()">Сохранить фото</button>
+  </div>
+
+  <script>
+    const photos = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg'];
+    let current = 0;
+    const slide = document.getElementById('slide');
+
+    // Вперёд (мгновенная смена)
+    function nextImage() {
+      current = (current + 1) % photos.length;
+      slide.src = photos[current];
+    }
+
+    // Назад (мгновенная смена)
+    function prevImage() {
+      current = (current - 1 + photos.length) % photos.length;
+      slide.src = photos[current];
+    }
+
+    // Сохранение фото
+    function saveImage() {
+      const link = document.createElement('a');
+      link.href = slide.src;
+      link.download = 'invitation_image.jpg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
